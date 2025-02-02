@@ -76,19 +76,20 @@ Sonic Flow of Elements 是一個基於 JavaScript 的生成式音樂與互動視
    - 建議使用本地伺服器（例如 VS Code 的 Live Server 或 Python 的 http.server）來啟動專案，避免跨域問題。
 
 2. **檔案結構**  
-   專案目錄結構如下：  
+   專案目錄結構如下：
 
+```
 SonicFlowOfElements/
 ├── index.html
 ├── css/
 │   └── style.css
 └── js/
-├── graph.js
-├── visuals.js
-├── sound.js
-├── controls.js
-└── main.js
-
+    ├── graph.js
+    ├── visuals.js
+    ├── sound.js
+    ├── controls.js
+    └── main.js
+```
 3. **啟動專案**  
 - 使用本地伺服器打開 index.html。  
 - 在控制面板中調整各項參數，然後點擊畫布（或節點）以觸發音樂序列生成與播放。
