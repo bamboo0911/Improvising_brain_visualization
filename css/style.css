@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    overflow: hidden;
+  }
+  
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+  
+  /* 控制面板 */
+  #controlPanel {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(20, 20, 20, 0.85);
+    padding: 15px;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    color: #EEE;
+    z-index: 100;
+    max-width: 240px;
+  }
+  
+  #controlPanel h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+  }
+  
+  .ctrlRow {
+    margin-bottom: 10px;
+  }
+  
+  .ctrlRow label {
+    display: inline-block;
+    width: 120px;
+  }
+  
+  .ctrlRow input[type="range"] {
+    width: 100px;
+  }
+  
+  .ctrlRow span {
+    margin-left: 5px;
+  }
+  
+  .ctrlRow button {
+    margin-top: 5px;
+    width: 100%;
+  }
+  
+  #controlPanel small {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  /* 額外按鈕 */
+  #togglePanel, #fullScreenBtn {
+    position: absolute;
+    background: rgba(20,20,20,0.85);
+    color: #EEE;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    z-index: 100;
+  }
+  
+  #togglePanel {
+    top: 10px;
+    left: 10px;
+  }
+  
+  #fullScreenBtn {
+    top: 10px;
+    left: 150px;
+  }
