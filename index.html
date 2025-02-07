@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonic Flow of Elements</title>
+    <title>Improvising Brain Visualization</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- 外部依賴 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
@@ -22,53 +22,53 @@
     <div id="controlPanel">
       <h3>控制面板</h3>
       <div class="ctrlRow">
-        <label for="bpmSlider">BPM:</label>
+        <label for="bpmSlider">BPM：</label>
         <input type="range" id="bpmSlider" min="40" max="240" value="120">
         <span id="bpmVal">120</span>
       </div>
       <div class="ctrlRow">
-        <label for="pitchOffset">音高偏移:</label>
+        <label for="pitchOffset">音高偏移：</label>
         <input type="range" id="pitchOffset" min="-12" max="12" value="0">
         <span id="pitchVal">0</span>
       </div>
       <!-- 
       <div class="ctrlRow">
-        <label for="nodeSpread">節點散佈:</label>
+        <label for="nodeSpread">節點散佈：</label>
         <input type="range" id="nodeSpread" min="100" max="800" value="400">
         <span id="spreadVal">400</span>
       </div> 
       -->
       <!-- 
       <div class="ctrlRow">
-        <label for="particleDensity">粒子密度:</label>
+        <label for="particleDensity">粒子密度：</label>
         <input type="range" id="particleDensity" min="5" max="50" value="20">
         <span id="particleVal">20</span>
       </div>
       -->
       <!-- 
       <div class="ctrlRow">
-        <label for="nodeJitter">節點抖動:</label>
+        <label for="nodeJitter">節點抖動：</label>
         <input type="range" id="nodeJitter" min="0" max="40" value="20">
         <span id="jitterVal">20</span>
       </div>
       -->
       <div class="ctrlRow">
-        <label for="nodeCount">節點數量:</label>
+        <label for="nodeCount">節點數量：</label>
         <input type="range" id="nodeCount" min="5" max="50" value="9">
         <span id="countVal">9</span>
       </div>
       <div class="ctrlRow">
-        <label for="connectivity">連結密度:</label>
+        <label for="connectivity">連結密度：</label>
         <input type="range" id="connectivity" min="0" max="1" step="0.01" value="0.5">
         <span id="connVal">0.50</span>
       </div>
       <div class="ctrlRow">
-        <label for="seqLength">序列長度:</label>
+        <label for="seqLength">序列長度：</label>
         <input type="range" id="seqLength" min="4" max="100" value="12">
         <span id="seqLength_val">12</span>
       </div>
       <div class="ctrlRow">
-        <label for="scaleSelect">音階:</label>
+        <label for="scaleSelect">音階：</label>
         <select id="scaleSelect">
           <option value="major" selected>Major</option>
           <option value="minor">Minor</option>
@@ -77,7 +77,7 @@
         <span id="scaleVal">Major</span>
       </div>
       <div class="ctrlRow">
-        <label for="tonicSelect">調性:</label>
+        <label for="tonicSelect">調性：</label>
         <select id="tonicSelect">
           <option value="C" selected>C</option>
           <option value="D">D</option>
@@ -90,40 +90,40 @@
         <span id="tonicVal">C</span>
       </div>
       <div class="ctrlRow">
-        <label for="outOfScaleProb">非音階機率:</label>
+        <label for="outOfScaleProb">非音階機率：</label>
         <input type="range" id="outOfScaleProb" min="0" max="0.5" step="0.01" value="0.01">
         <span id="outOfScaleProb_val">0.01</span>
       </div>
       <div class="ctrlRow">
         <!-- 當 stepwiseProb 接近 1 時，音高差小的邊權重會相對提升，增強控制在音高「小跳」的強度；當 stepwiseProb 接近 0 時，生成結果較隨機。 -->
-        <label for="stepwiseProb">步進可能性:</label>
+        <label for="stepwiseProb">步進可能性：</label>
         <input type="range" id="stepwiseProb" min="0" max="1" step="0.01" value="0.5">
         <span id="stepwiseProb_val">0.50</span>
       </div>
       <div class="ctrlRow">
-        <label for="restProb">休止符機率:</label>
+        <label for="restProb">休止符機率：</label>
         <input type="range" id="restProb" min="0" max="1" step="0.01" value="0.2">
         <span id="restProbVal">0.20</span>
       </div>
       <div class="ctrlRow">
-        <label>節奏機率分布:</label>
+        <label>節奏機率分布：</label>
         <div>
-          <label for="prob_4n">四分音符:</label>
+          <label for="prob_4n">四分音符：</label>
           <input type="range" id="prob_4n" min="0" max="1" step="0.01" value="0.25">
           <span id="prob_4n_val">0.25</span>
         </div>
         <div>
-          <label for="prob_8n">八分音符:</label>
+          <label for="prob_8n">八分音符：</label>
           <input type="range" id="prob_8n" min="0" max="1" step="0.01" value="0.25">
           <span id="prob_8n_val">0.25</span>
         </div>
         <div>
-          <label for="prob_triplet">三連音:</label>
+          <label for="prob_triplet">三連音：</label>
           <input type="range" id="prob_triplet" min="0" max="1" step="0.01" value="0.25">
           <span id="prob_triplet_val">0.25</span>
         </div>
         <div>
-          <label for="prob_16n">十六分音符:</label>
+          <label for="prob_16n">十六分音符：</label>
           <input type="range" id="prob_16n" min="0" max="1" step="0.01" value="0.25">
           <span id="prob_16n_val">0.25</span>
         </div>
