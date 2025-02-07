@@ -1,8 +1,13 @@
 // js/main.js
 // 主入口：初始化畫布、顏色模式，並調用各模組初始化函式
 
-// 為了讓 mousePressed() 能夠判斷點擊位置，將 canvas 存入全域變數 cnv
-let cnv;
+// 添加背景圖片變數
+let bgImage;
+
+// 在 setup 之前加載圖片
+function preload() {
+    bgImage = loadImage('path/to/your/image.jpg'); // 替換成你的圖片路徑
+}
 
 function setup() {
   cnv = createCanvas(windowWidth, windowHeight);
