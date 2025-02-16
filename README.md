@@ -2,6 +2,7 @@
 
 <img width="1280" alt="image" src="https://github.com/user-attachments/assets/5422e70e-2168-4569-ad19-a008c0f05aad" />
 
+</br>
 
 << DEMO Link >>: https://improvising-brain-visualization-git-main-bamboo0911s-projects.vercel.app/
 
