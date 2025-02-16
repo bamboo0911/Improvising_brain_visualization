@@ -1,13 +1,19 @@
 // js/visuals.js
 // 負責畫面更新與動畫繪製（背景、節點、邊與粒子效果）
 
+// js/visuals.js
+
 function updateVisuals() {
     // 清除背景
     clear();
     
-    // 計算中心點（與粒子系統一致）
+    // 水平中心點計算（與粒子系統一致）
     let availableWidth = windowWidth - 360; // 扣除控制面板寬度
     let centerX = availableWidth * 0.5;     // 使用可用寬度的 40%
+    
+    // 垂直偏移計算
+    let verticalOffset = 100; // 負值向上移動，正值向下移動，可以調整這個值
+    let centerY = height/2 + verticalOffset;
     
     // 檢查全域的 bgImage
     if (window.bgImage) {
@@ -21,14 +27,23 @@ function updateVisuals() {
         let newWidth = imgWidth * scale;
         let newHeight = imgHeight * scale;
         
-        // 使用與粒子系統相同的中心點繪製圖片
-        image(window.bgImage, centerX, height/2, newWidth, newHeight);
+        // 使用更新後的中心點繪製圖片
+        image(window.bgImage, centerX, centerY, newWidth, newHeight);
         
         // 添加半透明遮罩
         noStroke();
         fill(0, 0, 0, 200);
         rect(0, 0, width, height);
         pop();
+        
+        // 除錯資訊（可以註解掉）
+        console.log('Background position:', {
+            centerX,
+            centerY,
+            verticalOffset,
+            scale,
+            newSize: `${newWidth}x${newHeight}`
+        });
     } else {
         background(20);
     }

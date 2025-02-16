@@ -21,115 +21,116 @@
     <!-- 控制面板 -->
     <div id="controlPanel">
       <h3>控制面板</h3>
-      <div class="ctrlRow">
-        <label for="bpmSlider">BPM：</label>
-        <input type="range" id="bpmSlider" min="40" max="240" value="120">
-        <span id="bpmVal">120</span>
-      </div>
-      <div class="ctrlRow">
-        <label for="pitchOffset">音高偏移：</label>
-        <input type="range" id="pitchOffset" min="-12" max="12" value="0">
-        <span id="pitchVal">0</span>
-      </div>
-      <!-- 
-      <div class="ctrlRow">
-        <label for="nodeSpread">節點散佈：</label>
-        <input type="range" id="nodeSpread" min="100" max="800" value="400">
-        <span id="spreadVal">400</span>
-      </div> 
-      -->
-      <!-- 
-      <div class="ctrlRow">
-        <label for="particleDensity">粒子密度：</label>
-        <input type="range" id="particleDensity" min="5" max="50" value="20">
-        <span id="particleVal">20</span>
-      </div>
-      -->
-      <!-- 
-      <div class="ctrlRow">
-        <label for="nodeJitter">節點抖動：</label>
-        <input type="range" id="nodeJitter" min="0" max="40" value="20">
-        <span id="jitterVal">20</span>
-      </div>
-      -->
-      <div class="ctrlRow">
-        <label for="nodeCount">節點數量：</label>
-        <input type="range" id="nodeCount" min="5" max="50" value="9">
-        <span id="countVal">9</span>
-      </div>
-      <div class="ctrlRow">
-        <label for="connectivity">連結密度：</label>
-        <input type="range" id="connectivity" min="0" max="1" step="0.01" value="0.5">
-        <span id="connVal">0.50</span>
-      </div>
-      <div class="ctrlRow">
-        <label for="seqLength">序列長度：</label>
-        <input type="range" id="seqLength" min="4" max="100" value="12">
-        <span id="seqLength_val">12</span>
-      </div>
-      <div class="ctrlRow">
-        <label for="scaleSelect">音階：</label>
-        <select id="scaleSelect">
-          <option value="major" selected>Major</option>
-          <option value="minor">Minor</option>
-          <option value="chromatic">Chromatic</option>
-        </select>
-        <span id="scaleVal">Major</span>
-      </div>
-      <div class="ctrlRow">
-        <label for="tonicSelect">調性：</label>
-        <select id="tonicSelect">
-          <option value="C" selected>C</option>
-          <option value="D">D</option>
-          <option value="E">E</option>
-          <option value="F">F</option>
-          <option value="G">G</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-        </select>
-        <span id="tonicVal">C</span>
-      </div>
-      <div class="ctrlRow">
-        <label for="outOfScaleProb">非音階機率：</label>
-        <input type="range" id="outOfScaleProb" min="0" max="0.5" step="0.01" value="0.01">
-        <span id="outOfScaleProb_val">0.01</span>
-      </div>
-      <div class="ctrlRow">
-        <!-- 當 stepwiseProb 接近 1 時，音高差小的邊權重會相對提升，增強控制在音高「小跳」的強度；當 stepwiseProb 接近 0 時，生成結果較隨機。 -->
-        <label for="stepwiseProb">步進可能性：</label>
-        <input type="range" id="stepwiseProb" min="0" max="1" step="0.01" value="0.5">
-        <span id="stepwiseProb_val">0.50</span>
-      </div>
-      <div class="ctrlRow">
-        <label for="restProb">休止符機率：</label>
-        <input type="range" id="restProb" min="0" max="1" step="0.01" value="0.2">
-        <span id="restProbVal">0.20</span>
-      </div>
-      <div class="ctrlRow">
-        <label>節奏機率分布：</label>
-        <div>
-          <label for="prob_4n">四分音符：</label>
-          <input type="range" id="prob_4n" min="0" max="1" step="0.01" value="0.25">
-          <span id="prob_4n_val">0.25</span>
+      
+      <!-- 播放控制組 -->
+      <div class="control-group">
+        <label>播放控制</label>
+        <div class="control-row">
+          <label for="bpmSlider">BPM</label>
+          <input type="range" id="bpmSlider" min="40" max="240" value="120">
+          <span id="bpmVal">120</span>
         </div>
-        <div>
-          <label for="prob_8n">八分音符：</label>
-          <input type="range" id="prob_8n" min="0" max="1" step="0.01" value="0.25">
-          <span id="prob_8n_val">0.25</span>
+        <div class="control-row">
+          <label for="pitchOffset">音高偏移</label>
+          <input type="range" id="pitchOffset" min="-12" max="12" value="0">
+          <span id="pitchVal">0</span>
         </div>
-        <div>
-          <label for="prob_triplet">三連音：</label>
-          <input type="range" id="prob_triplet" min="0" max="1" step="0.01" value="0.25">
-          <span id="prob_triplet_val">0.25</span>
+      </div>
+      
+      <!-- 節點控制組 -->
+      <div class="control-group">
+        <label>節點設定</label>
+        <div class="control-row">
+          <label for="nodeCount">節點數量</label>
+          <input type="range" id="nodeCount" min="3" max="50" value="9">
+          <span id="countVal">9</span>
         </div>
-        <div>
-          <label for="prob_16n">十六分音符：</label>
-          <input type="range" id="prob_16n" min="0" max="1" step="0.01" value="0.25">
-          <span id="prob_16n_val">0.25</span>
+        <div class="control-row">
+          <label for="connectivity">連結密度</label>
+          <input type="range" id="connectivity" min="0" max="1" step="0.01" value="0.5">
+          <span id="connVal">0.50</span>
+        </div>
+        <div class="control-row">
+          <label for="seqLength">序列長度</label>
+          <input type="range" id="seqLength" min="4" max="500" value="12">
+          <span id="seqLength_val">12</span>
+        </div>
+      </div>
+      
+      <!-- 音階控制組 -->
+      <div class="control-group">
+        <label>音階設定</label>
+        <div class="control-row">
+          <label for="scaleSelect">音階</label>
+          <select id="scaleSelect">
+            <option value="major" selected>Major</option>
+            <option value="minor">Minor</option>
+            <option value="chromatic">Chromatic</option>
+          </select>
+          <span id="scaleVal">Major</span>
+        </div>
+        <div class="control-row">
+          <label for="tonicSelect">調性</label>
+          <select id="tonicSelect">
+            <option value="C" selected>C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+          </select>
+          <span id="tonicVal">C</span>
+        </div>
+      </div>
+      
+      <!-- 進階控制組 -->
+      <div class="control-group">
+        <label>進階設定</label>
+        <div class="control-row">
+          <label for="outOfScaleProb">非音階機率</label>
+          <input type="range" id="outOfScaleProb" min="0" max="0.5" step="0.01" value="0.01">
+          <span id="outOfScaleProb_val">0.01</span>
+        </div>
+        <div class="control-row">
+          <label for="stepwiseProb">步進可能性</label>
+          <input type="range" id="stepwiseProb" min="0" max="1" step="0.01" value="0.5">
+          <span id="stepwiseProb_val">0.50</span>
+        </div>
+        <div class="control-row">
+          <label for="restProb">休止符機率</label>
+          <input type="range" id="restProb" min="0" max="1" step="0.01" value="0.2">
+          <span id="restProbVal">0.20</span>
+        </div>
+      </div>
+      
+      <!-- 節奏控制組 -->
+      <div class="control-group">
+        <label>節奏機率分布</label>
+        <div class="rhythm-controls">
+          <div class="control-row">
+            <label for="prob_4n">四分音符</label>
+            <input type="range" id="prob_4n" min="0" max="1" step="0.01" value="1">
+            <span id="prob_4n_val">1</span>
+          </div>
+          <div class="control-row">
+            <label for="prob_8n">八分音符</label>
+            <input type="range" id="prob_8n" min="0" max="1" step="0.01" value="1">
+            <span id="prob_8n_val">1</span>
+          </div>
+          <div class="control-row">
+            <label for="prob_triplet">三連音</label>
+            <input type="range" id="prob_triplet" min="0" max="1" step="0.01" value="1">
+            <span id="prob_triplet_val">1</span>
+          </div>
+          <div class="control-row">
+            <label for="prob_16n">十六分音符</label>
+            <input type="range" id="prob_16n" min="0" max="1" step="0.01" value="1">
+            <span id="prob_16n_val">1</span>
+          </div>
         </div>
       </div>
     </div>
-    
     <!-- 載入 JS 模組，必須依照下列順序 -->
     <script src="js/graph.js"></script>
     <script src="js/visuals.js"></script>

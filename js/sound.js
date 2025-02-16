@@ -113,8 +113,57 @@ function generateSequence(startNode) {
   return seq;
 }
 
+function getNextRhythmFactor() {
+  // 獲取所有節奏機率值
+  const prob4n = parseFloat(select("#prob_4n").value());
+  const prob8n = parseFloat(select("#prob_8n").value());
+  const probTriplet = parseFloat(select("#prob_triplet").value());
+  const prob16n = parseFloat(select("#prob_16n").value());
+
+  // 計算總權重
+  const totalWeight = prob4n + prob8n + probTriplet + prob16n;
+  
+  // 如果所有權重都是0，默認使用四分音符
+  if (totalWeight === 0) {
+    return 1;
+  }
+
+  // 生成隨機值
+  const random = Math.random() * totalWeight;
+  
+  // 根據權重選擇節奏
+  let accumWeight = 0;
+  
+  // 四分音符 (1)
+  accumWeight += prob4n;
+  if (random < accumWeight) {
+    return 1;
+  }
+  
+  // 八分音符 (0.5)
+  accumWeight += prob8n;
+  if (random < accumWeight) {
+    return 0.5;
+  }
+  
+  // 三連音 (1/3)
+  accumWeight += probTriplet;
+  if (random < accumWeight) {
+    return 1/3;
+  }
+  
+  // 十六分音符 (0.25)
+  return 0.25;
+}
+
 function playSequence(seq, index = 0) {
-  if (index < seq.length && playState === "playing") {
+  if (index >= seq.length) {
+    // 序列結束，清理所有狀態
+    stopPlayback();
+    return;
+  }
+
+  if (playState === "playing") {
     currentSequence = seq;
     currentIndex = index;
     let bpm = parseFloat(select("#bpmSlider").value());
@@ -126,18 +175,18 @@ function playSequence(seq, index = 0) {
       factor = window.currentRhythmFactor;
       window.rhythmGroupRemaining--;
     } else {
-      // 定義可選的節奏乘數：1 = 四分音符, 0.5 = 八分音符, 0.66 = 三連音, 0.25 = 十六分音符
-      let rhythmFactors = [1, 0.5, 1/3, 0.25];
-      factor = random(rhythmFactors);
-      // 根據選定的 factor 設定群組長度（包括當前節點）
+      // 使用新的節奏選擇邏輯
+      factor = getNextRhythmFactor();
+      
+      // 設定群組長度
       if (factor === 1) {
-        window.rhythmGroupRemaining = 0;
+        window.rhythmGroupRemaining = 0;  // 四分音符不需要分組
       } else if (factor === 0.5) {
-        window.rhythmGroupRemaining = 1; // 共2個節點
+        window.rhythmGroupRemaining = 1;  // 八分音符成對
       } else if (factor === 1/3) {
-        window.rhythmGroupRemaining = 2; // 共3個節點
+        window.rhythmGroupRemaining = 2;  // 三連音分三個
       } else if (factor === 0.25) {
-        window.rhythmGroupRemaining = 3; // 共4個節點
+        window.rhythmGroupRemaining = 3;  // 十六分音符分四個
       }
       window.currentRhythmFactor = factor;
     }
@@ -147,45 +196,51 @@ function playSequence(seq, index = 0) {
     window.noteStartTime = millis();
     
     let node = seq[index];
-    // 如果此節點不是休止符，則播放聲音與產生粒子效果；若為休止符則跳過聲音
+    // 如果此節點不是休止符，則播放聲音與產生粒子效果
     if (!node.isRest) {
       let offset = parseInt(select("#pitchOffset").value());
       let midi = Tone.Frequency(node.note).toMidi() + offset;
       let newNote = Tone.Frequency(midi, "midi").toNote();
       
       let scheduledTime = Tone.now() + 0.05;
-      synth.triggerAttackRelease(newNote, "4n", scheduledTime);
+      // 設定音符持續時間為間隔的 80%，確保音符不會重疊
+      let noteDuration = interval * 0.8;
+      synth.triggerAttackRelease(newNote, noteDuration + "ms", scheduledTime);
       
-      let particleDensity = 30;
+      // 根據當前節奏調整粒子效果
+      let particleDensity = 30 * (1 / factor);
       let count = floor(random(particleDensity * 0.7, particleDensity * 1.3));
       for (let i = 0; i < count; i++) {
         let col = color(map(midi, 60, 80, 0, 360), 80, 100);
         particles.push(new Particle(node.x, node.y, col));
       }
-    } else {
-      console.log("Encountered rest node; skipping sound.");
     }
     
+    // 設置播放下一個音符的計時器
     playTimeout = setTimeout(() => {
       playSequence(seq, index + 1);
     }, interval);
-  } else {
-    // 播放結束後重置播放狀態與節奏分組
-    playState = "stopped";
-    currentSequence = [];
-    currentIndex = 0;
-    playTimeout = null;
-    window.currentRhythmFactor = null;
-    window.rhythmGroupRemaining = 0;
   }
 }
 
 function stopPlayback() {
-  if (playTimeout) clearTimeout(playTimeout);
+  // 立即停止當前正在播放的音符
+  if (synth) {
+    synth.triggerRelease();
+  }
+  
+  // 清除計時器
+  if (playTimeout) {
+    clearTimeout(playTimeout);
+    playTimeout = null;
+  }
+  
+  // 重置所有播放狀態
   playState = "stopped";
   currentSequence = [];
   currentIndex = 0;
-  playTimeout = null;
   window.currentRhythmFactor = null;
   window.rhythmGroupRemaining = 0;
+  
+  console.log('Playback stopped');
 }

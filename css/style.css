@@ -39,7 +39,7 @@ canvas {
   z-index: 0;
 }
 
-/* Control Panel Styling */
+/* Control Panel Base Styling */
 #controlPanel {
   position: fixed; /* Change to fixed */
   top: 0;
@@ -58,7 +58,7 @@ canvas {
 }
 
 #controlPanel h3 {
-  margin: 0 0 20px 0;
+  margin: 0 0 24px 0;
   font-size: 20px;
   font-weight: 600;
   color: var(--primary-color);
@@ -70,38 +70,50 @@ canvas {
   z-index: 1;
 }
 
+/* Updated Control Groups */
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.control-group > label {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 4px;
+}
+
 /* Control Row Layout */
-.ctrlRow {
-  margin-bottom: 16px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border-light);
+.control-row {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 120px 1fr 50px;
   gap: 12px;
   align-items: center;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
 }
 
-.ctrlRow:last-child {
-  border-bottom: none;
-}
-
-.ctrlRow label {
-  font-size: 14px;
-  font-weight: 500;
+.control-row label {
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
 }
 
-/* Value Display */
-.ctrlRow span {
-  font-size: 14px;
+.control-row span {
+  font-size: 13px;
   color: var(--primary-color);
   font-variant-numeric: tabular-nums;
-  min-width: 45px;
   text-align: right;
 }
 
-/* Modern Slider Styling */
-.ctrlRow input[type="range"] {
+/* Slider Styling */
+.control-row input[type="range"] {
   height: 6px;
   background: var(--slider-track);
   border-radius: 3px;
@@ -110,10 +122,10 @@ canvas {
   width: 100%;
 }
 
-.ctrlRow input[type="range"]::-webkit-slider-thumb {
+.control-row input[type="range"]::-webkit-slider-thumb {
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   background: var(--slider-thumb);
   border-radius: 50%;
   cursor: pointer;
@@ -121,27 +133,37 @@ canvas {
   border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.ctrlRow input[type="range"]::-webkit-slider-thumb:hover {
+.control-row input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.1);
   background: var(--accent-color);
 }
 
 /* Select Dropdown Styling */
-.ctrlRow select {
+.control-row select {
+  width: 100%;
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: 6px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid var(--border-light);
   color: var(--text-light);
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   outline: none;
   transition: border-color 0.2s ease;
 }
 
-.ctrlRow select:hover,
-.ctrlRow select:focus {
+.control-row select:hover,
+.control-row select:focus {
   border-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Rhythm Controls Specific */
+.rhythm-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
 }
 
 /* Control Buttons */
@@ -179,32 +201,14 @@ canvas {
   color: var(--background-dark);
 }
 
-/* Rhythm Distribution Controls */
-.ctrlRow div {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 12px;
-  align-items: center;
-  width: 100%;
-}
-
-/* Bottom Helper Text */
-#controlPanel small {
-  display: block;
-  margin-top: 16px;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  text-align: center;
-  position: sticky;
-  bottom: 0;
-  background: var(--panel-bg);
-  padding: 12px 0;
-}
-
 /* Responsive Adjustments */
 @media (max-width: 1024px) {
   :root {
     --panel-width: 320px;
+  }
+  
+  .control-row {
+    grid-template-columns: 100px 1fr 45px;
   }
 }
 
@@ -215,7 +219,7 @@ canvas {
   
   .canvas-container {
     margin-right: 0;
-    margin-bottom: 320px; /* Space for panel at bottom */
+    margin-bottom: 320px;
     height: calc(100vh - 320px);
   }
   
@@ -225,28 +229,4 @@ canvas {
     width: 100%;
     height: 320px;
   }
-  
-  #togglePanel,
-  #fullScreenBtn {
-    top: 20px;
-  }
-}
-
-/* High Contrast Focus States */
-input:focus,
-select:focus,
-button:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-/* Loading State */
-.loading {
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-/* Error State */
-.error {
-  border-color: #f44336 !important;
 }
