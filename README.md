@@ -1,6 +1,11 @@
 # Improvising Brain Visualization
 
-Sonic Flow of Elements 是一個基於 JavaScript 的生成式音樂與互動視覺藝術專案。透過 p5.js 和 Tone.js，本專案以隨機走訪的圖形結構為基礎生成音樂序列，並結合多項控制參數（如 BPM、音階、調性、休止符機率、非音階機率、步進（小跳）機率、節奏分布、序列長度等）讓使用者可以即時干預，進而引導後續節點的音高生成與和聲走向。
+<img width="1280" alt="image" src="https://github.com/user-attachments/assets/5422e70e-2168-4569-ad19-a008c0f05aad" />
+
+
+<< DEMO Link >>: https://improvising-brain-visualization-git-main-bamboo0911s-projects.vercel.app/
+
+一個基於 JavaScript 的音樂即興互動介面專案。透過 p5.js 和 Tone.js，本專案以隨機走訪的圖形結構為基礎生成音樂序列，並結合多項控制參數（如 BPM、音階、調性、休止符機率、非音階機率、步進（小跳）機率、節奏分布、序列長度等）讓使用者可以即時干預，進而引導後續節點的音高生成與和聲走向。
 
 ## 目錄
 
